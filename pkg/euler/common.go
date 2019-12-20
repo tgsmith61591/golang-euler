@@ -18,9 +18,19 @@ type Euler func() *EulerSolution
 
 
 // Executes a function and prints the time it took to run
-func TimedExecution(name string, f Euler) {
+func TimedExecution(name string, f Euler, expected string) {
 	start := time.Now()
-	result := f().Solution
+	result := f()
 	elapsed := time.Since(start)
-	fmt.Printf("%s:\t%s (%s)\n", name, result, elapsed)
+	
+	if result.Err != nil {
+		fmt.Printf("%s (FAIL):\t%s (%s)\n", name, result.Err, elapsed)
+	} else {
+		if result.Solution != expected {
+			fmt.Printf("%s (FAIL):\t%s != %s(%s)\n",
+					   name, result.Solution, expected, elapsed)
+		} else {
+			fmt.Printf("%s (PASS):\t%s (%s)\n", name, result.Solution, elapsed)
+		}
+	}
 }
