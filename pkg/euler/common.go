@@ -5,6 +5,8 @@ import (
 	"time"
 )
 
+// This allows us to pass around a function call to the TimedExecution method,
+// as some euler solutions will be floats or strings as opposed to ints.
 type EulerSolution struct{
 	Solution string
 	Err error
