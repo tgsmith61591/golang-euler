@@ -3,6 +3,9 @@ package euler
 import (
 	"fmt"
 	"time"
+	"runtime"
+	"path"
+	"path/filepath"
 )
 
 // This allows us to pass around a function call to the TimedExecution method,
@@ -24,13 +27,22 @@ func TimedExecution(name string, f Euler, expected string) {
 	elapsed := time.Since(start)
 	
 	if result.Err != nil {
-		fmt.Printf("%s (FAIL):\t%s (%s)\n", name, result.Err, elapsed)
+		fmt.Printf("%s (FAIL): %s (%s)\n", name, result.Err, elapsed)
 	} else {
 		if result.Solution != expected {
-			fmt.Printf("%s (FAIL):\t%s != %s(%s)\n",
+			fmt.Printf("%s (FAIL): %s != %s(%s)\n",
 					   name, result.Solution, expected, elapsed)
 		} else {
-			fmt.Printf("%s (PASS):\t%s (%s)\n", name, result.Solution, elapsed)
+			fmt.Printf("%s (PASS): %s (%s)\n", name, result.Solution, elapsed)
 		}
 	}
+}
+
+
+// Get the absolute path to the data directory in pkg
+func GetDataPath() string {
+	_, currentFilePath, _, _ := runtime.Caller(0)
+	dirpath := path.Dir(currentFilePath)
+	datapath := path.Dir(dirpath)
+	return filepath.Join(datapath, "data")
 }

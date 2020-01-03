@@ -13,5 +13,7 @@ func main() {
 	e.TimedExecution("Euler 6", e.Euler6, `25164150`)
 	e.TimedExecution("Euler 7", e.Euler7, `104743`)
 	e.TimedExecution("Euler 8", e.Euler8, `23514624000`)
-	e.TimedExecution("Euler 9", e.Euler9, `TODO`)
+	e.TimedExecution("Euler 9", e.Euler9, `31875000`)
+	e.TimedExecution("Euler 10", e.Euler10, `142913828922`)
+	e.TimedExecution("Euler 11", e.Euler11, `70600674`)
 }
